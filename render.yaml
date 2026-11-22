@@ -1,0 +1,44 @@
+# One-click setup for Render: New > Blueprint > pick this repo.
+databases:
+  - name: statskill-db
+    plan: free
+    databaseName: statskill
+    user: statskill
+
+services:
+  - type: web
+    name: statskill-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: python scripts/bootstrap.py && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.9
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DB_ENGINE
+        value: postgres
+      - key: DATABASE_HOST
+        fromDatabase: { name: statskill-db, property: host }
+      - key: DATABASE_PORT
+        fromDatabase: { name: statskill-db, property: port }
+      - key: DATABASE_NAME
+        fromDatabase: { name: statskill-db, property: database }
+      - key: DATABASE_USER
+        fromDatabase: { name: statskill-db, property: user }
+      - key: DATABASE_PASSWORD
+        fromDatabase: { name: statskill-db, property: password }
+      - key: PRINT_RESET_LINKS
+        value: "true"
+      # Fill these in the Render dashboard after the website exists / to create your admin:
+      - key: FRONTEND_URL
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false

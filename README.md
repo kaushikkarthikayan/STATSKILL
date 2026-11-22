@@ -177,3 +177,9 @@ Run `python scripts/import_ai_course.py` in `backend` to add *Artificial Intelli
 - **My notes** (`/notes`): students upload PDF or DOCX notes, or paste text. Notes are private to the student and also appear in a topic's *My notes* tab.
 - **Training bot**: level, XP, streak, plan and next-step buttons, from the student's own results (fixed rules, not an AI model).
 - **Characters**: a ghost (the training bot, who says Hii when touched, plans your work and points out your mistakes) and a stick figure who hangs from the PULL ME cord, sometimes slips, and is caught by the ghost. Both are switched off by *Reduce motion*.
+
+### One-click deploy (Render + Vercel)
+
+1. **Render**: New > Blueprint > pick this repo. `render.yaml` creates the free database and the API, generates `SECRET_KEY`, and `scripts/bootstrap.py` creates the tables and loads the three courses on every start (no shell needed). Fill in `ADMIN_EMAIL` and `ADMIN_PASSWORD` to create your administrator.
+2. **Vercel**: import the repo, Root Directory `frontend`, environment variable `VITE_API_URL=https://<your-render-address>/api`.
+3. Back in Render set `FRONTEND_URL` and `CORS_ORIGINS` to the Vercel address (no trailing slash), then redeploy.
