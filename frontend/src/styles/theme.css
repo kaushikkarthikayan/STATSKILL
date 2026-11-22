@@ -1,0 +1,227 @@
+/* =========================================================
+   StatSkill AI design tokens and template components.
+   Taken from the attached "Playful Sticker" template (DESIGN-SPEC.md):
+   the tokens, class names and motion are kept; only the brand is changed.
+   ========================================================= */
+:root {
+  --lime: #BDF700;
+  --lime-2: #D4FF4D;
+  --green: #0B3A0A;
+  --green-2: #14520F;
+  --brown: #6E4206;
+  --orange: #F47A10;
+  --yellow: #FFD60A;
+  --paper: #F4F3EF;
+  --white: #FFFFFF;
+  --ink: #0B0B0B;
+  --muted: #4A5A48;
+  --line: #D9D6CC;
+  --danger: #B3261E;
+  --danger-bg: #FDE7E4;
+  --ok-bg: #E4F6C9;
+  --warn-bg: #FFE9B8;
+
+  --font-display: "Barlow Condensed", "Futura PT Condensed", "Arial Narrow", sans-serif;
+  --font-body: "Inter Tight", Inter, system-ui, sans-serif;
+  --font-hand: "Nothing You Could Do", cursive;
+
+  --radius-md: 28px;
+  --radius-lg: 48px;
+  --pad: clamp(16px, 3vw, 40px);
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+  --ease-bounce: cubic-bezier(.34, 1.56, .64, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: .8;
+  letter-spacing: -.01em;
+}
+.handwritten { font-family: var(--font-hand); }
+
+.skip {
+  position: absolute; left: -999px; top: 8px; z-index: 2000;
+  background: var(--lime); color: var(--green); padding: 8px 14px; border-radius: 999px; font-weight: 700;
+}
+.skip:focus { left: 8px; }
+
+/* Crumpled-paper texture: add class="paper" to any section */
+.paper { position: relative; isolation: isolate; }
+.paper::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.009' numOctaves='4' seed='7'/%3E%3CfeDiffuseLighting lighting-color='%23fff' surfaceScale='2.2'%3E%3CfeDistantLight azimuth='40' elevation='55'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  opacity: .32;
+}
+
+/* Image placeholder: put an <img> inside to replace */
+.ph {
+  position: relative; overflow: hidden;
+  background:
+    repeating-linear-gradient(45deg, rgba(0,0,0,.06) 0 10px, transparent 10px 20px),
+    var(--ph-bg, #E9E4D8);
+}
+.ph[data-label]::after {
+  content: attr(data-label); position: absolute; inset: 0; display: grid; place-items: center;
+  font: 700 12px/1 var(--font-body); letter-spacing: .08em; text-transform: uppercase; color: rgba(0,0,0,.55);
+}
+.ph > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+
+/* Logo blob */
+.logo-badge {
+  display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
+  background: var(--green); color: var(--white);
+  font: 900 clamp(18px, 2.2vw, 30px)/.82 var(--font-display); text-transform: uppercase;
+  padding: .55em 1em .5em;
+  border-radius: 46% 54% 42% 58% / 60% 48% 52% 40%;
+  box-shadow: 0 0 0 4px var(--lime-2), 0 10px 20px rgba(0,0,0,.18);
+  transform: rotate(-6deg);
+}
+.logo-badge span:last-child { color: var(--lime); }
+.logo-badge--lg { font-size: clamp(30px, 6vw, 64px); }
+.logo-badge--sm { font-size: 18px; box-shadow: 0 0 0 3px var(--lime-2); }
+
+/* Small label pill with a dotted "stitch" */
+.pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--yellow); color: var(--green);
+  font: 800 13px/1 var(--font-display); text-transform: uppercase; letter-spacing: .02em;
+  padding: 8px 14px; border-radius: 6px; transform: rotate(-2deg);
+  box-shadow: 0 2px 0 rgba(0,0,0,.15);
+}
+.pill::before { content: ""; height: 12px; border-left: 2px dotted currentColor; }
+.pill--green { background: var(--green); color: var(--lime); }
+
+/* Disc ("roll") */
+.roll {
+  --size: 200px; --c: var(--yellow); --ink: var(--green);
+  width: var(--size); height: var(--size); flex: none; border-radius: 50%;
+  display: grid; place-items: center; position: relative; color: var(--ink);
+  background: radial-gradient(circle, var(--c) 0 63%, #fff 63.6% 66.5%, color-mix(in srgb, var(--c) 72%, #000) 67% 100%);
+  box-shadow: 0 calc(var(--size) * .06) calc(var(--size) * .12) rgba(0,0,0,.28), inset 0 0 0 calc(var(--size) * .018) rgba(0,0,0,.12);
+}
+.roll__label {
+  display: flex; flex-direction: column; align-items: center; gap: calc(var(--size) * .025);
+  font-family: var(--font-display); font-weight: 900; text-transform: uppercase; text-align: center;
+}
+.roll__brand { font-size: calc(var(--size) * .055); line-height: .9; background: var(--green); color: #fff; padding: .35em .7em; border-radius: 40%; transform: rotate(-6deg); }
+.roll__name { font-size: calc(var(--size) * .125); line-height: .82; }
+.roll__tag { font-size: calc(var(--size) * .048); line-height: 1; background: var(--ink); color: var(--c); padding: .3em .7em; border-radius: 99px; }
+
+/* =========================================================
+   WELCOME SCREEN: preloader, hero, marquee
+   ========================================================= */
+.welcome { background: var(--green); }
+.preloader {
+  position: fixed; inset: 0; z-index: 1500; background: var(--lime);
+  display: grid; place-items: center;
+  transition: transform .9s var(--ease-out) .1s;
+}
+.preloader .logo-badge { animation: wobble .6s ease-in-out infinite alternate; }
+.welcome.is-loaded .preloader { transform: translateY(-101%); }
+@keyframes wobble { from { transform: rotate(-9deg) scale(.95); } to { transform: rotate(5deg) scale(1.05); } }
+
+.welcome__bar {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 20;
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  padding: 16px var(--pad);
+}
+.welcome__actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.hero {
+  background: var(--lime); min-height: 100svh;
+  padding: clamp(86px, 11vh, 120px) var(--pad) 0;
+  text-align: center; overflow: hidden;
+}
+.hero__top { display: flex; justify-content: center; align-items: center; gap: clamp(16px, 7vw, 120px); }
+.hero__word { font: 900 clamp(18px, 2.4vw, 34px)/1 var(--font-display); text-transform: uppercase; color: var(--green); }
+.hero__title {
+  margin: .08em 0 0; color: var(--green);
+  font-size: clamp(84px, 19vw, 300px);
+  display: flex; flex-direction: column; align-items: center;
+  position: relative; z-index: 2;
+}
+.hero__title .line { display: block; white-space: nowrap; }
+.ch {
+  display: inline-block; opacity: 0;
+  transform: translateY(80%) rotate(10deg);
+  transition: transform .9s var(--ease-bounce), opacity .4s;
+  transition-delay: calc(var(--i) * 45ms + var(--d, 0ms) + 500ms);
+}
+.welcome.is-loaded .ch { opacity: 1; transform: none; }
+
+.hero__float {
+  position: absolute; z-index: 3;
+  width: clamp(100px, 14vw, 220px); aspect-ratio: 4 / 5; border-radius: var(--radius-md);
+  box-shadow: 0 0 0 6px var(--green), 0 20px 30px rgba(0,0,0,.2);
+  animation: bob 6s ease-in-out infinite;
+}
+.hero__float--l { left: 5%; top: 40%; --r: -8deg; }
+.hero__float--r { right: 6%; top: 30%; --r: 7deg; animation-delay: -3s; }
+@keyframes bob { 0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); } 50% { transform: translateY(-14px) rotate(calc(var(--r, 0deg) * -.5)); } }
+
+.hero__sub {
+  max-width: 560px; margin: clamp(18px, 3vw, 34px) auto 0;
+  font: 900 clamp(16px, 1.5vw, 21px)/1.1 var(--font-display); text-transform: uppercase; letter-spacing: -.02em;
+  color: var(--brown);
+}
+.hero__cta { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 26px; position: relative; z-index: 4; }
+.hero__dome {
+  position: relative; height: clamp(140px, 18vw, 260px);
+  margin: clamp(110px, 13vw, 200px) -20% 0;
+  background: var(--green);
+  border-radius: 50% 50% 0 0 / 100% 100%;
+}
+.hero__roll { position: absolute; left: 50%; top: 0; translate: -50% -58%; animation: spinBob 9s ease-in-out infinite; }
+.hero__roll .roll { --size: clamp(170px, 22vw, 300px); }
+@keyframes spinBob { 0%, 100% { transform: rotate(-8deg) translateY(0); } 50% { transform: rotate(8deg) translateY(-16px); } }
+
+.band { background: linear-gradient(var(--green) 50%, transparent 50%); padding: 20px 0 30px; overflow: hidden; }
+.band__strip {
+  background: var(--lime); width: 112%; margin-left: -6%; rotate: -3deg;
+  border-block: 4px solid var(--green); overflow: hidden;
+}
+.band__track { display: flex; width: max-content; animation: marquee 28s linear infinite; }
+.band__track span {
+  font: 900 clamp(40px, 7vw, 110px)/1.05 var(--font-display); text-transform: uppercase;
+  color: var(--green); white-space: nowrap; padding-right: .4em;
+}
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+@media (max-width: 860px) {
+  .hero__float { width: 80px; }
+  .hero__float--l { top: auto; bottom: 150px; left: 4%; }
+  .hero__float--r { top: auto; bottom: 190px; right: 4%; }
+  .hero__top { gap: 14px; }
+}
+
+/* Motion off: the operating-system setting, or the "Reduce motion" switch on the welcome screen */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .ch { opacity: 1; transform: none; }
+  .preloader { display: none; }
+}
+html[data-reduce-motion="true"] *, html[data-reduce-motion="true"] *::before, html[data-reduce-motion="true"] *::after {
+  animation: none !important; transition: none !important; scroll-behavior: auto !important;
+}
+html[data-reduce-motion="true"] .ch { opacity: 1; transform: none; }
+html[data-reduce-motion="true"] .preloader { display: none; }

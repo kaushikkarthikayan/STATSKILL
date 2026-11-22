@@ -1,0 +1,19 @@
+# Secrets and local data: never upload these
+.env
+*.env
+!.env.example
+*.db
+*.sqlite
+*.sqlite3
+backend/storage/
+backend/uploads/
+
+# Installed or built files
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+node_modules/
+dist/
+.vite/
