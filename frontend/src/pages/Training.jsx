@@ -295,15 +295,13 @@ export function Training() {
           <span className="kicker">Course training</span>
           <h1 className="page-title">{course ? course.name : "Course"}</h1>
         </div>
-        <Field label="Course" htmlFor="training-course">
-          <select id="training-course" className="select" value={courseId} onChange={(event) => setPicked(Number(event.target.value))}>
-            {courses.map((item) => (
-              <option key={item.id} value={item.id}>
-                {item.name}
-              </option>
-            ))}
-          </select>
-        </Field>
+        <div className="course-tabs" role="radiogroup" aria-label="Courses">
+          {courses.map((item) => (
+            <button key={item.id} type="button" role="radio" aria-checked={item.id === courseId} className={`chip chip--button course-tab ${item.id === courseId ? "is-on" : ""}`} onClick={() => setPicked(item.id)}>
+              {item.name}
+            </button>
+          ))}
+        </div>
       </div>
 
       {detail.loading && <Loading label="Loading the course..." />}

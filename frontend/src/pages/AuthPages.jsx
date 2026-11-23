@@ -14,7 +14,7 @@ function AuthLayout({ title, intro, children, footer }) {
     <div className="auth paper" style={{ position: "relative" }}>
       <DoodleField items={DOODLES.welcome} />
       <div className="auth__wrap" style={{ position: "relative", zIndex: 1 }}>
-        <Link to="/" aria-label="AI home">
+        <Link to="/" aria-label="Study Buddy home">
           <LogoBadge size="lg" />
         </Link>
         <div className="auth__coach">
@@ -139,7 +139,7 @@ export function Signup() {
     setBusy(true);
     try {
       await register(form.name.trim(), form.email.trim(), form.password, form.confirm);
-      toast.success("Account created. Welcome to AI!");
+      toast.success("Account created. Welcome to Study Buddy!");
       navigate("/dashboard", { replace: true });
     } catch (error) {
       setFormError(error.message);

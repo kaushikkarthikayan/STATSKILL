@@ -69,7 +69,7 @@ export default function StudyBuddy() {
       {open && (
         <section className="buddy__panel card" aria-label="Arri">
           <div className="row row--between">
-            <strong className="card__title" style={{ margin: 0 }}>Arri</strong>
+            <strong className="card__title" style={{ margin: 0 }}>Arri, your Study Buddy</strong>
             <button className="btn btn--sm" onClick={() => setOpen(false)} aria-label="Close Arri">✕</button>
           </div>
           <div className="buddy__brief">

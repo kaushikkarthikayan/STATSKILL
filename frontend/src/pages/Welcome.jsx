@@ -32,7 +32,7 @@ export default function Welcome() {
   const [reduced, setReduced] = useState(() => document.documentElement.dataset.reduceMotion === "true");
 
   useEffect(() => {
-    document.title = "AI | Skill assessment and practice";
+    document.title = "Study Buddy | Skill assessment and practice";
     const timer = setTimeout(() => setLoaded(true), 1100); // how long the logo shows before the page opens
     return () => clearTimeout(timer);
   }, []);
@@ -103,7 +103,7 @@ export default function Welcome() {
           <div className="hero__cta">{buttons}</div>
           <div className="hero__dome">
             <div className="hero__roll">
-              <Disc name="AI" tag="Skill check" />
+              <Disc brand="STUDY" name="BUDDY" tag="Skill check" />
             </div>
           </div>
         </section>
@@ -137,7 +137,7 @@ export default function Welcome() {
 
       <footer className="how how--foot">
         <div className="how__inner row row--between">
-          <span>AI. Skill assessment, practice and progress.</span>
+          <span>Study Buddy. Skill assessment, practice and progress.</span>
           <span className="row">
             <Link to="/login">Log in</Link>
             <Link to="/signup">Sign up</Link>
