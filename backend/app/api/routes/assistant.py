@@ -110,7 +110,7 @@ def _answer(question: str, data: dict, user) -> tuple[str, list[dict] | None]:
     first = user.full_name.split(" ")[0]
     stats = data["stats"]
     if _has(q, "hi", "hii", "hiii", "hello", "hey", "hola", "yo") and len(q.split()) <= 4:
-        return f"Hii {first}! I am your study buddy. Ask me to plan your work or point out your mistakes.", None
+        return f"Hii {first}! I am Arri, your study buddy. Ask me to plan your work or point out your mistakes.", None
     if _has(q, "mistake", "wrong", "error", "went wrong", "fail"):
         return _mistakes(user)
     if _has(q, "level", "xp", "rank"):

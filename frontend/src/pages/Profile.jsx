@@ -387,7 +387,7 @@ function Builder({ initial, options, courses, attempts, reloadAll }) {
               <div>
                 <SectionTitle doodle="sparkle">{percent === 100 ? "Your profile is complete!" : "Your profile"}</SectionTitle>
                 <p className="muted" style={{ margin: 0 }}>
-                  {percent === 100 ? "Everything is saved. Your dashboard and recommendations use these choices." : `${percent}% complete. Fill in the rest to get the most from StatSkill AI.`}
+                  {percent === 100 ? "Everything is saved. Your dashboard and recommendations use these choices." : `${percent}% complete. Fill in the rest to get the most from AI.`}
                 </p>
               </div>
               <button type="button" className="btn btn--primary" onClick={() => jump(0)}>

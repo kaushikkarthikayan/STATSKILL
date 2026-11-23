@@ -56,7 +56,7 @@ function Shell() {
     setMenuOpen(false);
     if (!location.hash) window.scrollTo(0, 0);
     const match = TITLES.find(([prefix]) => location.pathname.startsWith(prefix));
-    document.title = `${match ? match[1] : "StatSkill AI"} | StatSkill AI`;
+    document.title = `${match ? match[1] : "AI"} | AI`;
   }, [location.pathname, location.hash]);
 
   const signOut = async () => {
@@ -77,7 +77,7 @@ function Shell() {
       </a>
 
       <header className="topbar2">
-        <Link to="/dashboard" className="topbar2__brand" aria-label="StatSkill AI dashboard">
+        <Link to="/dashboard" className="topbar2__brand" aria-label="AI dashboard">
           <LogoBadge size="sm" />
         </Link>
 
@@ -139,7 +139,7 @@ function Shell() {
           </Draggable>
         </div>
         <div className="foot__bar">
-          <span>StatSkill AI. Skill assessment, practice and progress.</span>
+          <span>AI. Skill assessment, practice and progress.</span>
           <span className="row">
             <Link to="/about">About</Link>
             <Link to="/about#creators">Meet the team</Link>

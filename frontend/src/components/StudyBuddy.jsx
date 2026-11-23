@@ -67,10 +67,10 @@ export default function StudyBuddy() {
   return (
     <div className="buddy">
       {open && (
-        <section className="buddy__panel card" aria-label="Study buddy">
+        <section className="buddy__panel card" aria-label="Arri">
           <div className="row row--between">
-            <strong className="card__title" style={{ margin: 0 }}>Study buddy</strong>
-            <button className="btn btn--sm" onClick={() => setOpen(false)} aria-label="Close study buddy">✕</button>
+            <strong className="card__title" style={{ margin: 0 }}>Arri</strong>
+            <button className="btn btn--sm" onClick={() => setOpen(false)} aria-label="Close Arri">✕</button>
           </div>
           <div className="buddy__brief">
             <div className="buddy__ghost">
@@ -125,7 +125,7 @@ export default function StudyBuddy() {
           <p className="muted small" style={{ margin: 0 }}>Answers come from your own results using fixed rules. This is not an AI chatbot.</p>
         </section>
       )}
-      <button className="buddy__fab" onClick={() => { setOpen((o) => !o); if (!open) poke(); }} aria-expanded={open} aria-label="Study buddy">
+      <button className="buddy__fab" onClick={() => { setOpen((o) => !o); if (!open) poke(); }} aria-expanded={open} aria-label="Arri">
         <Ghost head auto size={64} />
       </button>
     </div>

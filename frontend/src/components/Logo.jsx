@@ -2,8 +2,7 @@
 export function LogoBadge({ size }) {
   const extra = size === "lg" ? "logo-badge--lg" : size === "sm" ? "logo-badge--sm" : "";
   return (
-    <div className={`logo-badge ${extra}`} aria-label="StatSkill AI" role="img">
-      <span>STATSKILL</span>
+    <div className={`logo-badge ${extra}`} aria-label="AI" role="img">
       <span>AI</span>
     </div>
   );

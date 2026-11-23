@@ -9,12 +9,12 @@ import { ErrorBox, Field, Loading, useConfirm, useLoad, useToast } from "../ui.j
 
 const SECTIONS = [
   {
-    title: "What StatSkill AI does",
+    title: "What AI does",
     text: "It checks your skills with multiple-choice tests, shows which topics are strong and which are missing, and gives you study material, books and practice questions for the gaps.",
   },
   {
     title: "Why it exists",
-    text: "Many students study everything equally and never learn where they are weak. StatSkill AI points your time at the topics where your own answers show you need it.",
+    text: "Many students study everything equally and never learn where they are weak. AI points your time at the topics where your own answers show you need it.",
   },
   {
     title: "How you benefit",
@@ -305,7 +305,7 @@ export default function About() {
       <div className="page__head">
         <div>
           <span className="kicker">About</span>
-          <h1 className="page-title">About StatSkill AI</h1>
+          <h1 className="page-title">About AI</h1>
           <p className="lead">A skill assessment and practice platform for students.</p>
         </div>
       </div>
@@ -322,7 +322,7 @@ export default function About() {
       </section>
 
       <h2 className="section-title" style={{ marginTop: 40 }}>
-        <span>How StatSkill AI works</span>
+        <span>How AI works</span>
       </h2>
       <div className="grid grid--2">
         {SECTIONS.map((section) => (
