@@ -1,4 +1,4 @@
-"""Training bot: manages the student's progress using fixed rules and their own stored results.
+"""Study buddy: manages the student's progress using fixed rules and their own stored results.
 
 It is not a language model. Every number and every mistake it mentions comes from the database,
 and anything it cannot answer gets a friendly list of what it can.
@@ -15,7 +15,7 @@ from app.db.models import Attempt, AttemptItem, Question, Topic
 from app.services.common import ensure_profile
 from app.services.learning import learning_overview
 
-router = APIRouter(prefix="/assistant", tags=["Training bot"])
+router = APIRouter(prefix="/assistant", tags=["Study buddy"])
 
 RANKS = ["Rookie", "Explorer", "Apprentice", "Thinker", "Problem Solver", "Analyst", "Strategist", "Expert", "Master", "Legend"]
 SUGGESTIONS = ["Plan my work", "Point out my mistakes", "What is my level?", "How am I doing?", "Which topics are weak?", "What is my streak?"]
@@ -110,7 +110,7 @@ def _answer(question: str, data: dict, user) -> tuple[str, list[dict] | None]:
     first = user.full_name.split(" ")[0]
     stats = data["stats"]
     if _has(q, "hi", "hii", "hiii", "hello", "hey", "hola", "yo") and len(q.split()) <= 4:
-        return f"Hii {first}! I am your training bot. Ask me to plan your work or point out your mistakes.", None
+        return f"Hii {first}! I am your study buddy. Ask me to plan your work or point out your mistakes.", None
     if _has(q, "mistake", "wrong", "error", "went wrong", "fail"):
         return _mistakes(user)
     if _has(q, "level", "xp", "rank"):

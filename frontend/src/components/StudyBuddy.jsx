@@ -7,7 +7,7 @@ import { Bubble } from "./Sketch.jsx";
 
 const ASKS = ["Plan my work", "Point out my mistakes", "What is my level?", "How am I doing?"];
 
-/* The training bot. The ghost manages the student's progress from their own results (XP, level, streak, plan)
+/* The study buddy. The ghost manages the student's progress from their own results (XP, level, streak, plan)
    using fixed rules. He is not a language model. He types while you type, thinks while he works and says Hii when touched. */
 export default function StudyBuddy() {
   const [open, setOpen] = useState(false);
@@ -67,10 +67,10 @@ export default function StudyBuddy() {
   return (
     <div className="buddy">
       {open && (
-        <section className="buddy__panel card" aria-label="Training bot">
+        <section className="buddy__panel card" aria-label="Study buddy">
           <div className="row row--between">
-            <strong className="card__title" style={{ margin: 0 }}>Training bot</strong>
-            <button className="btn btn--sm" onClick={() => setOpen(false)} aria-label="Close training bot">✕</button>
+            <strong className="card__title" style={{ margin: 0 }}>Study buddy</strong>
+            <button className="btn btn--sm" onClick={() => setOpen(false)} aria-label="Close study buddy">✕</button>
           </div>
           <div className="buddy__brief">
             <div className="buddy__ghost">
@@ -125,7 +125,7 @@ export default function StudyBuddy() {
           <p className="muted small" style={{ margin: 0 }}>Answers come from your own results using fixed rules. This is not an AI chatbot.</p>
         </section>
       )}
-      <button className="buddy__fab" onClick={() => { setOpen((o) => !o); if (!open) poke(); }} aria-expanded={open} aria-label="Training bot">
+      <button className="buddy__fab" onClick={() => { setOpen((o) => !o); if (!open) poke(); }} aria-expanded={open} aria-label="Study buddy">
         <Ghost head auto size={64} />
       </button>
     </div>

@@ -175,8 +175,8 @@ Run `python scripts/import_ai_course.py` in `backend` to add *Artificial Intelli
 
 - `python scripts/import_ai_course.py` now loads 13 AI topics; `python scripts/import_calculus_course.py` adds Engineering Mathematics: Calculus (8 topics, notes, 40 sample MCQs). Notes are original text, not copied from any textbook. Review the sample questions before real use.
 - **My notes** (`/notes`): students upload PDF or DOCX notes, or paste text. Notes are private to the student and also appear in a topic's *My notes* tab.
-- **Training bot**: level, XP, streak, plan and next-step buttons, from the student's own results (fixed rules, not an AI model).
-- **Characters**: a ghost (the training bot, who says Hii when touched, plans your work and points out your mistakes) and a stick figure who hangs from the PULL ME cord, sometimes slips, and is caught by the ghost. Both are switched off by *Reduce motion*.
+- **Study buddy**: level, XP, streak, plan and next-step buttons, from the student's own results (fixed rules, not an AI model).
+- **Characters**: a ghost (the study buddy, who says Hii when touched, plans your work and points out your mistakes) and a stick figure who hangs from the PULL ME cord, sometimes slips, and is caught by the ghost. Both are switched off by *Reduce motion*.
 
 ### One-click deploy (Render + Vercel)
 
