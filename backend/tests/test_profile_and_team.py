@@ -1,10 +1,10 @@
-﻿"""Profile options and fields, the seeded team, and the startup migration for older databases."""
+"""Profile options and fields, the seeded team, and the startup migration for older databases."""
 
 from app.db.database import database
 from app.db.models import Creator
 from app.db.setup import ensure_columns
 
-TEAM_ORDER = ["Kaushik Karthikayan", "Jhon Fanny", "Anna", "Jonas", "Ashwin", "Neha", "Karthikayan", "Princy", "Cris", "Jude"]
+TEAM_ORDER = ["G Kaushik", "Jhon Fanny", "Anna", "Jonas", "Ashwin", "Neha", "Karthikayan", "Princy", "Cris", "Jude"]
 
 
 def test_profile_options_and_new_fields_are_saved(client, student, catalog):

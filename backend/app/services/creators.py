@@ -9,14 +9,14 @@ from app.db.models import Creator
 
 TEAM = (
     {
-        "name": "Kaushik Karthikayan",
+        "name": "G Kaushik",
         "nickname": None,
         "role_title": "UI",
         "title": "The UI Architect",
         "theme_color": "#BDF700",
         "avatar": "scholar",
         "description": "Turns rough ideas into screens that feel good to tap, and sweats the spacing, colour and tiny details.",
-        "intro": "Kaushik Karthikayan shapes how StatSkill AI looks and feels, from the first animation to the last button.",
+        "intro": "G Kaushik shapes how Study Buddy looks and feels, from the first animation to the last button.",
     },
     {
         "name": "Jhon Fanny",
@@ -56,7 +56,7 @@ TEAM = (
         "theme_color": "#FF8A65",
         "avatar": "captain",
         "description": "Sees a blank page as an invitation, not a problem.",
-        "intro": "Ashwin brings fresh angles to how StatSkill AI looks and works.",
+        "intro": "Ashwin brings fresh angles to how Study Buddy looks and works.",
     },
     {
         "name": "Neha",
@@ -76,7 +76,7 @@ TEAM = (
         "theme_color": "#2EC4B6",
         "avatar": "cool",
         "description": "Loves turning a what-if into a working prototype before anyone can argue.",
-        "intro": "Karthikayan pushes StatSkill AI towards new and better ideas.",
+        "intro": "Karthikayan pushes Study Buddy towards new and better ideas.",
     },
     {
         "name": "Princy",
@@ -115,7 +115,8 @@ _OLD_PLACEHOLDERS = {"Creator 1", "Creator 2", "Creator 3"}
 
 # Untouched seeded rows that were created with an earlier spelling are renamed once.
 _RENAMES = {
-    "Kaushik": ("Kaushik Karthikayan", "Kaushik shapes how", "Kaushik Karthikayan shapes how"),
+    "Kaushik": ("G Kaushik", "Kaushik shapes how", "G Kaushik shapes how"),
+    "Kaushik Karthikayan": ("G Kaushik", "Kaushik Karthikayan shapes how", "G Kaushik shapes how"),
     "Alfin": ("Jhon Fanny", "Alfin keeps the", "Jhon Fanny keeps the"),
 }
 
@@ -126,6 +127,10 @@ def _apply_renames() -> None:
         if rule:
             row.name = rule[0]
             row.intro = (row.intro or "").replace(rule[1], rule[2])
+            row.save()
+        # The site is called Study Buddy; untouched placeholder text still using the old name is corrected.
+        if "StatSkill AI" in (row.intro or ""):
+            row.intro = row.intro.replace("StatSkill AI", "Study Buddy")
             row.save()
 
 
