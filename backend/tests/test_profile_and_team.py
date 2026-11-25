@@ -4,7 +4,7 @@ from app.db.database import database
 from app.db.models import Creator
 from app.db.setup import ensure_columns
 
-TEAM_ORDER = ["G Kaushik", "Jhon Fanny", "Anna", "Jonas", "Ashwin", "Neha", "Karthikayan", "Princy", "Cris", "Jude"]
+TEAM_ORDER = ["G Kaushik", "Jhon Fanny"]
 
 
 def test_profile_options_and_new_fields_are_saved(client, student, catalog):
@@ -47,7 +47,6 @@ def test_team_is_seeded_in_the_requested_order(client, admin):
     team = client.get("/api/creators").json()
     assert [member["name"] for member in team] == TEAM_ORDER
     assert team[0]["role_title"] == "UI"
-    assert team[3]["nickname"] == "Jons"
     options = client.get("/api/profile/options", headers=admin["headers"]).json()
     avatar_ids = {a["id"] for a in options["avatars"]}
     for member in team:
@@ -55,7 +54,7 @@ def test_team_is_seeded_in_the_requested_order(client, admin):
         assert member["avatar"] in avatar_ids
         assert member["theme_color"].startswith("#") and len(member["theme_color"]) == 7
         assert member["is_placeholder"] is True
-    assert len({member["theme_color"] for member in team}) == 10  # every character has its own colour
+    assert len({member["theme_color"] for member in team}) == 2  # every character has its own colour
 
 
 def test_admins_can_edit_character_details_with_validation(client, admin):
@@ -84,7 +83,7 @@ def test_edited_creators_are_never_overwritten(client, admin):
     first = client.get("/api/creators").json()[0]
     client.put(f"/api/creators/{first['id']}", json={"name": "Edited Name"}, headers=admin["headers"])
     team = client.get("/api/creators").json()
-    assert len(team) == 10
+    assert len(team) == 2
     assert team[0]["name"] == "Edited Name"
 
 
@@ -99,3 +98,12 @@ def test_missing_columns_are_added_to_an_older_database(client):
     assert set(added) == {"creator.nickname", "creator.title", "creator.intro", "creator.theme_color", "creator.avatar"}
     assert ensure_columns() == []  # running it again changes nothing
 
+
+
+def test_other_members_are_removed_from_an_older_database(client):
+    client.get("/api/creators")  # seeds the two project members
+    for number, name in enumerate(["Anna", "Jonas", "Jude"], start=3):
+        Creator.create(name=name, role_title="Team member", description="old", position=number, is_placeholder=True)
+    Creator.create(name="Mentor Meena", role_title="Mentor", description="added by hand", position=9, is_placeholder=False)
+    names = [member["name"] for member in client.get("/api/creators").json()]
+    assert names == ["G Kaushik", "Jhon Fanny", "Mentor Meena"]  # untouched placeholders go; people added by hand stay

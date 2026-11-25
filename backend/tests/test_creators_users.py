@@ -7,7 +7,7 @@ PNG_BYTES = b"\x89PNG\r\n\x1a\n" + b"0" * 32
 
 def test_placeholders_are_listed_and_only_admins_can_edit(client, admin, student):
     listed = client.get("/api/creators").json()  # public: the About page works before login
-    assert len(listed) == 10
+    assert len(listed) == 2
     assert all(c["is_placeholder"] for c in listed)
 
     creator_id = listed[0]["id"]
